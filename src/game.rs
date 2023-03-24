@@ -1,10 +1,10 @@
-use piston_window::*;
 use piston_window::types::Color;
+use piston_window::*;
 
 use rand::{thread_rng, Rng};
 
-use crate::snake::{Direction, Snake};
 use crate::draw::{draw_block, draw_rectangle};
+use crate::snake::{Direction, Snake};
 
 const FOOD_COLOR: Color = [0.80, 0.00, 0.00, 1.0];
 const BORDER_COLOR: Color = [0.00, 0.00, 0.00, 1.0];
@@ -25,20 +25,20 @@ pub struct Game {
     height: i32,
 
     game_over: bool,
-    waiting_time: f64
+    waiting_time: f64,
 }
 
 impl Game {
     pub fn new(width: i32, height: i32) -> Game {
         Game {
-            snake: Snake::new(2,2),
+            snake: Snake::new(2, 2),
             waiting_time: 0.0,
             food_exists: true,
             food_x: 6,
             food_y: 4,
             width,
             height,
-            game_over: false
+            game_over: false,
         }
     }
 
@@ -52,7 +52,7 @@ impl Game {
             Key::Down => Some(Direction::Down),
             Key::Left => Some(Direction::Left),
             Key::Right => Some(Direction::Right),
-            _ => None
+            _ => None,
         };
 
         if direction.unwrap() == self.snake.head_direction().opposite() {
@@ -80,6 +80,8 @@ impl Game {
     }
 
     pub fn update(&mut self, delta_time: f64) {
+        self.waiting_time += delta_time;
+
         if self.game_over && self.waiting_time > RESTART_TIME {
             self.restart();
             return;
