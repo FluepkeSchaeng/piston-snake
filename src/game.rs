@@ -94,6 +94,14 @@ impl Game {
         }
     }
 
+    fn check_eating(&mut self) {
+        let (head_x, head_y): (i32, i32) = self.snake.head_position();
+        if self.food_exists && self.food_x == head_x && self.food_y == head_y {
+            self.food_exists = false;
+            self.snake.restore_tail();
+        }
+    }
+
     fn add_food(&mut self) {
         todo!();
     }
