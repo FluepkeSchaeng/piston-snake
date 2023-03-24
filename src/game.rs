@@ -65,4 +65,21 @@ impl Game {
     fn update_snake(&mut self, dir: Option<Direction>) {
         todo!();
     }
+
+    pub fn draw(&self, con: &Context, g: &mut G2d) {
+        self.snake.draw(con, g);
+
+        if self.food_exists {
+            draw_block(FOOD_COLOR, self.food_x, self.food_y, con, g);
+        }
+
+        draw_rectangle(BORDER_COLOR, 0, 0, self.width, self.height, con, g);
+        draw_rectangle(BORDER_COLOR, 0, self.height - 1, self.width, 1, con, g);
+        draw_rectangle(BORDER_COLOR, 0, 0, 1, self.height, con, g);
+        draw_rectangle(BORDER_COLOR, self.width - 1, 0, 1, self.height, con, g);
+
+        if self.game_over {
+            draw_rectangle(GAME_OVER_COLOR, 0, 0, self.width, self.height, con, g);
+        }
+    }
 }
