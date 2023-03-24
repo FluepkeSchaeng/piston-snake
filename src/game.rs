@@ -52,7 +52,7 @@ impl Game {
             Key::Down => Some(Direction::Down),
             Key::Left => Some(Direction::Left),
             Key::Right => Some(Direction::Right),
-            _ => None,
+            _ => Some(self.snake.head_direction())
         };
 
         if direction.unwrap() == self.snake.head_direction().opposite() {
@@ -69,7 +69,7 @@ impl Game {
             draw_block(FOOD_COLOR, self.food_x, self.food_y, con, g);
         }
 
-        draw_rectangle(BORDER_COLOR, 0, 0, self.width, self.height, con, g);
+        draw_rectangle(BORDER_COLOR, 0, 0, self.width, 1, con, g);
         draw_rectangle(BORDER_COLOR, 0, self.height - 1, self.width, 1, con, g);
         draw_rectangle(BORDER_COLOR, 0, 0, 1, self.height, con, g);
         draw_rectangle(BORDER_COLOR, self.width - 1, 0, 1, self.height, con, g);
