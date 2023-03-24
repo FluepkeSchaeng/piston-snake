@@ -24,7 +24,9 @@ pub struct Game {
     width: i32,
     height: i32,
 
+    game_paused: bool,
     game_over: bool,
+
     waiting_time: f64,
 }
 
@@ -38,12 +40,18 @@ impl Game {
             food_y: 4,
             width,
             height,
+            game_paused: false,
             game_over: false,
         }
     }
 
     pub fn key_pressed(&mut self, key: Key) {
         if self.game_over {
+            return;
+        }
+
+        if key == Key::P {
+            self.toggle_pause();
             return;
         }
 
@@ -79,7 +87,19 @@ impl Game {
         }
     }
 
+    fn toggle_pause(&mut self) {
+        if self.game_paused {
+            self.game_paused = false;
+        } else {
+            self.game_paused = true;
+        }
+    }
+
     pub fn update(&mut self, delta_time: f64) {
+        if self.game_paused {
+            return;
+        }
+
         self.waiting_time += delta_time;
 
         if self.game_over {
