@@ -102,14 +102,14 @@ impl Game {
         let (head_x, head_y): (i32, i32) = self.snake.head_position();
         if self.food_exists && self.food_x == head_x && self.food_y == head_y {
             self.food_exists = false;
-            self.snake.restore_tail();
+            self.snake.eat_food();
         }
     }
 
     fn check_if_snake_alive(&self, dir: Option<Direction>) -> bool {
         let (next_x, next_y) = self.snake.next_head(dir);
 
-        if self.snake.overlap_tail(next_x, next_y) {
+        if self.snake.does_collide(next_x, next_y) {
             return false;
         }
 
@@ -121,7 +121,7 @@ impl Game {
 
         let mut new_x = rng.gen_range(1..self.width - 1);
         let mut new_y = rng.gen_range(1..self.width - 1);
-        while self.snake.overlap_tail(new_x, new_y) {
+        while self.snake.does_collide(new_x, new_y) {
             new_x = rng.gen_range(1..self.width - 1);
             new_y = rng.gen_range(1..self.width - 1);
         }

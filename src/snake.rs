@@ -115,12 +115,12 @@ impl Snake {
         }
     }
 
-    pub fn restore_tail(&mut self) {
+    pub fn eat_food(&mut self) {
         let block = self.tail.clone().unwrap();
         self.body.push_back(block);
     }
 
-    pub fn overlap_tail(&self, x: i32, y: i32) -> bool {
+    pub fn does_collide(&self, x: i32, y: i32) -> bool {
         let mut ch = 0;
         for block in &self.body {
             if x == block.x && y == block.y {
