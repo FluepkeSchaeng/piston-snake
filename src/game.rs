@@ -8,7 +8,7 @@ use crate::draw::{draw_block, draw_rectangle};
 
 const FOOD_COLOR: Color = [0.80, 0.00, 0.00, 1.0];
 const BORDER_COLOR: Color = [0.00, 0.00, 0.00, 1.0];
-const GAME_OVER_COLOR: Color = [0,90, 0.00, 0.00, 0.5];
+const GAME_OVER_COLOR: Color = [0.90, 0.00, 0.00, 0.5];
 
 /// Frames per Second
 const MOVING_PERIOD: f64 = 0.1;
